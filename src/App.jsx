@@ -470,6 +470,9 @@ const profileDefaults = {
   tags: ['Voiceon'],
   accountLabel: 'Voiceon Internal account',
   balance: '$0.00/€0.00',
+  internalBalance: '$0.00/€0.00',
+  funds: '$0.00',
+  expresses: '$0.00',
   socialAuth: '—',
   password: 'Created',
   twoFactor: null,
@@ -485,7 +488,7 @@ const profiles = {
   5: { gender: 'Female', birthDate: '21 Nov 1993 (32 years old)', country: 'Belarus', icaDate: '26.02.2025', position: 'Support manager', tags: ['Support', 'Voiceon'], twoFactor: '+375 29 444 55 66' },
   6: { gender: 'Male', birthDate: '—', country: '—', icaDate: '19.08.2026', position: 'Creator', tags: ['Blocked'] },
   7: { gender: 'Male', birthDate: '02 Apr 1989 (37 years old)', country: 'Belarus', icaDate: '15.11.2021', position: 'Super admin', tags: ['Admin', 'Voiceon'], twoFactor: '+375 29 777 88 99' },
-  8: { gender: 'Male', birthDate: '16 Jun 1988 (38 years old)', country: 'Cyprus', icaDate: '03.03.2022', position: 'Garna Partner (CY)', tags: ['Garna', 'Partner'], twoFactor: '+357 99 123 456' },
+  8: { gender: 'Male', birthDate: '16 Jun 1988 (38 years old)', country: 'Cyprus', icaDate: '03.03.2022', position: 'Garna Partner (CY)', tags: ['Garna', 'Partner'], twoFactor: '+357 99 123 456', internalBalance: '$3,120.00/€0.00', funds: '$18,400.00', expresses: '$2,600.00', appDevice: 'desktop' },
   9: { gender: 'Female', birthDate: '30 Sep 1997 (28 years old)', country: 'United States', icaDate: '12.01.2025', position: 'Studio editor', tags: ['Studio', 'Voiceon'] },
   10: {
     gender: 'Male',
@@ -497,25 +500,28 @@ const profiles = {
     accountLabel: 'Garna Internal account',
     twoFactor: '+375 29 123 45 67',
     lastActionApp: '24 Aug 2026',
+    internalBalance: '$540.00/€0.00',
+    funds: '$12,180.00',
+    expresses: '$1,450.00',
   },
   11: { gender: 'Female', birthDate: '14 Mar 1995 (31 years old)', country: 'Poland', icaDate: '04.02.2025', position: 'Content moderator', tags: ['Support', 'Voiceon'], twoFactor: '+48 512 334 556' },
   12: { gender: 'Male', birthDate: '27 Aug 1999 (27 years old)', country: 'Georgia', icaDate: '25.08.2026', position: 'Creator', tags: ['Voiceon'] },
-  13: { gender: 'Female', birthDate: '05 Dec 1996 (29 years old)', country: 'Kazakhstan', icaDate: '18.09.2024', position: 'Support manager', tags: ['Support', 'Voiceon'], twoFactor: '+7 701 223 44 55', balance: '$120.40/€110.85' },
+  13: { gender: 'Female', birthDate: '05 Dec 1996 (29 years old)', country: 'Kazakhstan', icaDate: '18.09.2024', position: 'Support manager', tags: ['Support', 'Voiceon'], twoFactor: '+7 701 223 44 55', balance: '$120.40/€110.85', internalBalance: '$0.00/€45.20', funds: '$1,280.00', expresses: '$0.00' },
   14: { gender: 'Male', birthDate: '—', country: 'Germany', icaDate: '24.08.2026', position: 'Creator', tags: ['Voiceon'] },
   15: { gender: 'Female', birthDate: '19 Jun 1994 (32 years old)', country: 'Portugal', icaDate: '07.05.2025', position: 'Studio editor', tags: ['Studio', 'Voiceon'], twoFactor: '+351 912 445 778' },
   16: { gender: 'Female', birthDate: '02 Feb 2000 (26 years old)', country: 'Vietnam', icaDate: '21.08.2026', position: 'Voice talent', tags: ['Voiceon'] },
-  17: { gender: 'Male', birthDate: '11 Oct 1990 (35 years old)', country: 'Cyprus', icaDate: '13.06.2023', position: 'Payments specialist', tags: ['Fintech', 'Voiceon'], twoFactor: '+357 96 774 112', balance: '$0.00/€2,480.00' },
+  17: { gender: 'Male', birthDate: '11 Oct 1990 (35 years old)', country: 'Cyprus', icaDate: '13.06.2023', position: 'Payments specialist', tags: ['Fintech', 'Voiceon'], twoFactor: '+357 96 774 112', balance: '$0.00/€2,480.00', internalBalance: '$1,940.00/€0.00', funds: '$7,350.00', expresses: '$410.00', appDevice: 'desktop' },
   18: { gender: 'Female', birthDate: '23 Apr 1993 (33 years old)', country: 'Spain', icaDate: '02.10.2024', position: 'Community manager 2.0', tags: ['Community', 'Voiceon'], twoFactor: '+34 611 998 220' },
   19: { gender: 'Male', birthDate: '—', country: 'Turkey', icaDate: '15.08.2026', position: 'Creator', tags: ['Blocked'] },
-  20: { gender: 'Female', birthDate: '08 Jul 1987 (39 years old)', country: 'Belarus', icaDate: '29.01.2022', position: 'Finance manager', tags: ['Fintech', 'Admin'], twoFactor: '+375 29 660 77 88', balance: '$4,310.00/€0.00' },
+  20: { gender: 'Female', birthDate: '08 Jul 1987 (39 years old)', country: 'Belarus', icaDate: '29.01.2022', position: 'Finance manager', tags: ['Fintech', 'Admin'], twoFactor: '+375 29 660 77 88', balance: '$4,310.00/€0.00', internalBalance: '$260.00/€0.00', funds: '$22,900.00', expresses: '$5,180.00', appDevice: 'desktop' },
   21: { gender: 'Male', birthDate: '30 Jan 1992 (34 years old)', country: 'India', icaDate: '11.11.2023', position: 'QA engineer', tags: ['Product', 'Voiceon'], twoFactor: '+91 98200 44112' },
   22: { gender: 'Female', birthDate: '—', country: 'Serbia', icaDate: '20.08.2026', position: 'Creator', tags: ['Voiceon'] },
-  23: { gender: 'Female', birthDate: '17 Sep 1991 (34 years old)', country: 'Ukraine', icaDate: '06.04.2024', position: 'Partner manager', tags: ['Garna', 'Partner'], twoFactor: '+380 67 220 11 90' },
+  23: { gender: 'Female', birthDate: '17 Sep 1991 (34 years old)', country: 'Ukraine', icaDate: '06.04.2024', position: 'Partner manager', tags: ['Garna', 'Partner'], twoFactor: '+380 67 220 11 90', internalBalance: '$0.00/€0.00', funds: '$960.00', expresses: '$120.00' },
   24: { gender: 'Male', birthDate: '25 May 1998 (28 years old)', country: 'Czechia', icaDate: '19.08.2026', position: 'Creator', tags: ['Voiceon'] },
   25: { gender: 'Female', birthDate: '12 Feb 1995 (31 years old)', country: 'Armenia', icaDate: '23.07.2024', position: 'Product designer', tags: ['Product', 'Voiceon'], twoFactor: '+374 91 556 220' },
-  26: { gender: 'Male', birthDate: '06 Nov 1989 (36 years old)', country: 'United Arab Emirates', icaDate: '30.05.2026', position: 'Voice talent', tags: ['Approved', 'Voiceon'], balance: '$860.00/€0.00' },
+  26: { gender: 'Male', birthDate: '06 Nov 1989 (36 years old)', country: 'United Arab Emirates', icaDate: '30.05.2026', position: 'Voice talent', tags: ['Approved', 'Voiceon'], balance: '$860.00/€0.00', internalBalance: '$0.00/€0.00', funds: '$3,040.00', expresses: '$0.00' },
   27: { gender: 'Female', birthDate: '28 Mar 1994 (32 years old)', country: 'Ukraine', icaDate: '14.12.2022', position: 'Support manager', tags: ['Support', 'Voiceon'], twoFactor: '+380 63 118 44 20' },
-  28: { gender: 'Male', birthDate: '09 Aug 1986 (40 years old)', country: 'Brazil', icaDate: '09.02.2023', position: 'Garna Partner (BR)', tags: ['Garna', 'Partner'], accountLabel: 'Garna Internal account', twoFactor: '+55 11 96442 8810', balance: '$12,700.00/€0.00' },
+  28: { gender: 'Male', birthDate: '09 Aug 1986 (40 years old)', country: 'Brazil', icaDate: '09.02.2023', position: 'Garna Partner (BR)', tags: ['Garna', 'Partner'], accountLabel: 'Garna Internal account', twoFactor: '+55 11 96442 8810', balance: '$12,700.00/€0.00', internalBalance: '$8,450.00/€1,200.00', funds: '$41,600.00', expresses: '$9,730.00' },
   29: { gender: 'Male', birthDate: '—', country: 'Thailand', icaDate: '11.08.2026', position: 'Creator', tags: ['Voiceon'] },
   30: { gender: 'Female', birthDate: '21 Dec 1996 (29 years old)', country: 'Armenia', icaDate: '17.06.2025', position: 'Community manager 2.0', tags: ['Community', 'Voiceon'], twoFactor: '+374 77 330 118' },
 }
@@ -867,9 +873,18 @@ function UserCard({ user, onBack }) {
             </span>
           </p>
         </div>
-        <div className="user-card-balance">
-          <span>{profile.accountLabel}</span>
-          <strong>{profile.balance}</strong>
+        <div className="user-card-stats">
+          {[
+            { label: profile.accountLabel, value: profile.balance },
+            { label: 'Internal account', value: profile.internalBalance },
+            { label: 'Funds', value: profile.funds },
+            { label: 'Expresses', value: profile.expresses },
+          ].map(({ label, value }) => (
+            <div key={label} className="user-card-stat">
+              <span>{label}</span>
+              <strong>{value}</strong>
+            </div>
+          ))}
         </div>
       </div>
 
@@ -921,7 +936,7 @@ function UserCard({ user, onBack }) {
               <Field label="Last action in the app">
                 <span className="action-cell">
                   {profile.lastActionApp}
-                  <Smartphone size={17} />
+                  {profile.appDevice === 'desktop' ? <Monitor size={17} /> : <Smartphone size={17} />}
                 </span>
               </Field>
             </div>

@@ -513,16 +513,19 @@ button { transition: .18s ease; }
   display: inline-flex; align-items: center; padding: 2px 9px; border-radius: var(--r-pill);
   background: var(--surface-3); color: var(--text-2); font-size: 12px; font-weight: 500;
 }
-.user-card-balance {
-  text-align: right; margin-left: auto; padding: 8px 14px; border-radius: var(--r-md);
-  background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+/* the hero carries the figures as a plain row — no boxes, the labels do the
+   separating. each column sizes to its own content and never wraps a figure. */
+.user-card-stats {
+  margin-left: auto; display: flex; align-items: flex-start; gap: 22px; flex-wrap: wrap;
+  flex: 0 1 auto;
 }
-.user-card-balance span {
-  display: block; font-size: 12.5px; font-weight: 600; color: var(--text-muted);
+.user-card-stat { text-align: right; min-width: 0; }
+.user-card-stat span {
+  display: block; font-size: 12.5px; font-weight: 600; color: var(--text-muted); white-space: nowrap;
 }
-.user-card-balance strong {
-  display: block; margin-top: 3px; font-variant-numeric: tabular-nums;
-  font-size: 15.5px; font-weight: 500; letter-spacing: -.3px; color: var(--text);
+.user-card-stat strong {
+  display: block; margin-top: 3px; font-variant-numeric: tabular-nums; white-space: nowrap;
+  font-size: 15.5px; font-weight: 800; letter-spacing: -.3px; color: var(--text);
 }
 .user-card-tabs {
   display: flex; gap: 4px; overflow-x: auto; margin: 0 0 4px;
@@ -771,6 +774,7 @@ button { transition: .18s ease; }
 
 @media (max-width: 720px) {
   .profile-grid { grid-template-columns: 1fr; }
-  .user-card-balance { text-align: left; margin-left: 0; width: 100%; }
+  .user-card-stats { margin-left: 0; width: 100%; gap: 18px; }
+  .user-card-stat { text-align: left; }
   .user-drawer { width: 100vw; }
 }
