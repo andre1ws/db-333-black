@@ -410,6 +410,39 @@ button { transition: .18s ease; }
 }
 .count-button.active svg, .archive-button.active svg { color: var(--accent); }
 
+
+/* Fixed presets — the second way into the Channels list. Outline pills, the
+   same pill radius the rest of the interface uses, with the explanation held
+   back until hover. */
+.quick-presets { display: flex; flex-wrap: wrap; gap: 7px; margin: 12px 0 0; }
+.quick-preset {
+  position: relative; height: 30px; padding: 0 13px;
+  display: inline-flex; align-items: center;
+  background: var(--surface); border: 1px solid var(--border-strong);
+  border-radius: var(--r-pill); color: var(--text-2);
+  font-size: 12.5px; font-weight: 500; white-space: nowrap;
+}
+.quick-preset:hover { background: var(--surface-3); color: var(--text); }
+.quick-preset.active {
+  background: var(--accent-tint); border-color: var(--accent-line);
+  color: var(--accent-ink); font-weight: 600;
+}
+/* the tooltip is the dark card from the navigation, pointed at its pill */
+.quick-preset-hint {
+  position: absolute; left: 50%; bottom: calc(100% + 9px); transform: translateX(-50%);
+  width: max-content; max-width: 230px; padding: 8px 11px;
+  background: var(--nav-canvas); color: #f1f2f3;
+  border-radius: var(--r-md); box-shadow: var(--shadow-md);
+  font-size: 12.5px; font-weight: 500; line-height: 1.35; white-space: normal; text-align: left;
+  opacity: 0; visibility: hidden; transition: opacity .14s ease; pointer-events: none; z-index: 30;
+}
+.quick-preset-hint::after {
+  content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+  border: 5px solid transparent; border-top-color: var(--nav-canvas);
+}
+.quick-preset:hover .quick-preset-hint,
+.quick-preset:focus-visible .quick-preset-hint { opacity: 1; visibility: visible; }
+
 /* the period field sits in the toolbar but reads as an input, not a chip */
 .period-picker { flex: 0 0 auto; min-width: 0; width: 220px; }
 .period-picker input { cursor: pointer; }

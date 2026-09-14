@@ -226,24 +226,41 @@ const mainPartners = 931
 /* Channels: the roster is ranked by subscribers, and `best` is the flame the
    reference puts on the avatar — the same channels the toolbar counts. */
 const channels = [
-  { id: 1, name: 'MrBeast', avatar: 'photo-b', best: true, status: 'IRRELEVANT', subscribers: 517000000, views: 139873613790, views30: 3063239051, lastVideo: '31 Jul 2026' },
-  { id: 2, name: 'T-Series', avatar: 'photo-d', best: true, status: 'IRRELEVANT', subscribers: 315000000, views: 355046722643, views30: 3607333533, lastVideo: '25 Aug 2026' },
-  { id: 3, name: 'Cocomelon - Nursery', avatar: 'photo-a', best: true, status: 'POSTPONED', subscribers: 202000000, views: 227168644735, views30: 1583400040, lastVideo: '30 Jul 2026' },
-  { id: 4, name: 'YouTube Movies', avatar: 'default', best: false, status: 'POSTPONED', subscribers: 199000000, views: 0, views30: 0, lastVideo: null },
-  { id: 5, name: 'SET India', avatar: 'photo-c', best: true, status: 'IRRELEVANT', subscribers: 190000000, views: 192382913729, views30: 1148273774, lastVideo: '26 Aug 2026' },
-  { id: 6, name: 'Vlad and Niki', avatar: 'photo-a', best: true, status: 'IRRELEVANT', subscribers: 150000000, views: 123302163908, views30: 627604500, lastVideo: '22 Aug 2026' },
-  { id: 7, name: 'Stokes Twins', avatar: 'photo-d', best: false, status: 'NO ANSWER', subscribers: 146000000, views: 32933956751, views30: 523255473, lastVideo: '29 Jul 2026' },
-  { id: 8, name: '\u273f Kids Diana Show', avatar: 'photo-b', best: true, status: 'POSTPONED', subscribers: 138000000, views: 125935974474, views30: 378898477, lastVideo: '20 Aug 2026' },
-  { id: 9, name: '\uae40\ud504\ub85cKIMPRO', avatar: 'photo-c', best: true, status: 'POSTPONED', subscribers: 135000000, views: 153661917113, views30: 1759463922, lastVideo: '26 Aug 2026' },
-  { id: 10, name: 'Like Nastya', avatar: 'photo-a', best: true, status: 'POSTPONED', subscribers: 133000000, views: 123037466470, views30: 412174217, lastVideo: '22 Aug 2026' },
-  { id: 11, name: 'Music', avatar: 'photo-d', best: false, status: 'IRRELEVANT', subscribers: 128000000, views: 0, views30: 0, lastVideo: null },
-  { id: 12, name: 'Zee Music Company', avatar: 'photo-c', best: true, status: 'POSTPONED', subscribers: 123000000, views: 91305955541, views30: 952358436, lastVideo: '07 Sep 2026' },
-  { id: 13, name: 'Alejo Igoa', avatar: 'photo-b', best: true, status: 'POSTPONED', subscribers: 121000000, views: 36986781865, views30: 552996834, lastVideo: '14 Aug 2026' },
-  { id: 14, name: 'WWE', avatar: 'photo-c', best: false, status: 'NO ANSWER', subscribers: 114000000, views: 106938536342, views30: 649323553, lastVideo: '16 Aug 2026' },
-  { id: 15, name: 'Goldmines', avatar: 'photo-a', best: true, status: 'POSTPONED', subscribers: 110000000, views: 32850486504, views30: 392720225, lastVideo: '18 Aug 2026' },
+  { id: 1, name: 'MrBeast', avatar: 'photo-b', best: true, status: 'IRRELEVANT', subscribers: 517000000, views: 139873613790, views30: 3063239051, lastVideo: '31 Jul 2026', traits: ['adsense', 'trending', 'fast-growth', 'upload-frequency', 'email-added'] },
+  { id: 2, name: 'T-Series', avatar: 'photo-d', best: true, status: 'IRRELEVANT', subscribers: 315000000, views: 355046722643, views30: 3607333533, lastVideo: '25 Aug 2026', traits: ['adsense', 'trending', 'upload-frequency', 'email-added', 'personal-email'] },
+  { id: 3, name: 'Cocomelon - Nursery', avatar: 'photo-a', best: true, status: 'POSTPONED', subscribers: 202000000, views: 227168644735, views30: 1583400040, lastVideo: '30 Jul 2026', traits: ['adsense', 'upload-frequency', 'email-added'] },
+  { id: 4, name: 'YouTube Movies', avatar: 'default', best: false, status: 'POSTPONED', subscribers: 199000000, views: 0, views30: 0, lastVideo: null, traits: ['no-monetization', 'disconnected'] },
+  { id: 5, name: 'SET India', avatar: 'photo-c', best: true, status: 'IRRELEVANT', subscribers: 190000000, views: 192382913729, views30: 1148273774, lastVideo: '26 Aug 2026', traits: ['adsense', 'upload-frequency', 'trending', 'personal-telegram'] },
+  { id: 6, name: 'Vlad and Niki', avatar: 'photo-a', best: true, status: 'IRRELEVANT', subscribers: 150000000, views: 123302163908, views30: 627604500, lastVideo: '22 Aug 2026', traits: ['adsense', 'fast-growth', 'email-added'] },
+  { id: 7, name: 'Stokes Twins', avatar: 'photo-d', best: false, status: 'NO ANSWER', subscribers: 146000000, views: 32933956751, views30: 523255473, lastVideo: '29 Jul 2026', traits: ['new-email', 'email-added', 'personal-whatsapp'] },
+  { id: 8, name: '\u273f Kids Diana Show', avatar: 'photo-b', best: true, status: 'POSTPONED', subscribers: 138000000, views: 125935974474, views30: 378898477, lastVideo: '20 Aug 2026', traits: ['adsense', 'upload-frequency', 'email-added', 'personal-email'] },
+  { id: 9, name: '\uae40\ud504\ub85cKIMPRO', avatar: 'photo-c', best: true, status: 'POSTPONED', subscribers: 135000000, views: 153661917113, views30: 1759463922, lastVideo: '26 Aug 2026', traits: ['adsense', 'trending', 'fast-growth', 'upload-frequency'] },
+  { id: 10, name: 'Like Nastya', avatar: 'photo-a', best: true, status: 'POSTPONED', subscribers: 133000000, views: 123037466470, views30: 412174217, lastVideo: '22 Aug 2026', traits: ['adsense', 'email-added', 'personal-telegram'] },
+  { id: 11, name: 'Music', avatar: 'photo-d', best: false, status: 'IRRELEVANT', subscribers: 128000000, views: 0, views30: 0, lastVideo: null, traits: ['no-monetization', 'disconnected'] },
+  { id: 12, name: 'Zee Music Company', avatar: 'photo-c', best: true, status: 'POSTPONED', subscribers: 123000000, views: 91305955541, views30: 952358436, lastVideo: '07 Sep 2026', traits: ['adsense', 'upload-frequency', 'email-added'] },
+  { id: 13, name: 'Alejo Igoa', avatar: 'photo-b', best: true, status: 'POSTPONED', subscribers: 121000000, views: 36986781865, views30: 552996834, lastVideo: '14 Aug 2026', traits: ['new-channel', 'new-email', 'fast-growth', 'personal-whatsapp'] },
+  { id: 14, name: 'WWE', avatar: 'photo-c', best: false, status: 'NO ANSWER', subscribers: 114000000, views: 106938536342, views30: 649323553, lastVideo: '16 Aug 2026', traits: ['disconnected', 'no-monetization', 'new-email'] },
+  { id: 15, name: 'Goldmines', avatar: 'photo-a', best: true, status: 'POSTPONED', subscribers: 110000000, views: 32850486504, views30: 392720225, lastVideo: '18 Aug 2026', traits: ['adsense', 'upload-frequency', 'personal-email'] },
 ]
 
 /* the reference shows the full catalogue behind the page, not just this slice */
+/* Channels get a second way in: fixed presets instead of a built-up filter.
+   Each one is a trait to match, and the hint is what the tooltip says. */
+const channelPresets = [
+  { key: 'disconnected', label: 'Disconnected from network', hint: 'Channel left the network and is no longer connected' },
+  { key: 'adsense', label: 'Connected to AdSense', hint: 'Channel has an AdSense account linked' },
+  { key: 'no-monetization', label: 'Without monetization', hint: 'Channel earns nothing — no monetization enabled' },
+  { key: 'new-email', label: 'New email', hint: 'Email was added as a contact in the last 3 months' },
+  { key: 'new-channel', label: 'New channel', hint: 'Channel joined in the last 3 months' },
+  { key: 'fast-growth', label: 'Fast growth', hint: 'Subscribers grew faster than the network average' },
+  { key: 'upload-frequency', label: 'Video upload frequency', hint: 'Channel publishes on a steady schedule' },
+  { key: 'trending', label: 'Trending', hint: 'Views for 30 days are climbing sharply' },
+  { key: 'email-added', label: 'Email added', hint: 'At least one email is on file for this channel' },
+  { key: 'personal-email', label: 'Personal email', hint: 'A personal email is on file, not a shared inbox' },
+  { key: 'personal-telegram', label: 'Personal Telegram', hint: 'A personal Telegram contact is on file' },
+  { key: 'personal-whatsapp', label: 'Personal WhatsApp', hint: 'A personal WhatsApp contact is on file' },
+]
+
 const channelTotal = 4903057
 const bestChannels = 4823166
 
@@ -1050,6 +1067,7 @@ function FiltersPanel({
   fields, draft, field, condition, value, activePreset, canAdd, onAdd,
   onFieldChange, onConditionChange, onValueChange, onRemove, onClear, onClose,
   onApply, applyDisabled, presetName, onPresetNameChange, onSavePreset, onDeletePreset,
+  quickPresets, activeQuick, onQuickToggle,
 }) {
   const currentField = fields.find((item) => item.key === field)
   const valueDisabled = !currentField || condition === 'empty'
@@ -1120,6 +1138,22 @@ function FiltersPanel({
           </div>
         ) : (
           <span className="filters-empty">No filters added yet</span>
+        )}
+
+        {quickPresets && (
+          <div className="quick-presets">
+            {quickPresets.map((preset) => (
+              <button
+                key={preset.key}
+                className={`quick-preset ${activeQuick === preset.key ? 'active' : ''}`}
+                onClick={() => onQuickToggle(activeQuick === preset.key ? null : preset.key)}
+                aria-pressed={activeQuick === preset.key}
+              >
+                {preset.label}
+                <span className="quick-preset-hint" role="tooltip">{preset.hint}</span>
+              </button>
+            ))}
+          </div>
         )}
 
         <div className="filters-actions">
@@ -2176,6 +2210,7 @@ function ChannelsPage() {
   const [query, setQuery] = useState('')
   const [sort, setSort] = useState({ key: 'subscribers', dir: 'desc' })
   const [scope, setScope] = useState(null)
+  const [quick, setQuick] = useState(null)
   const filters = useFilters(channelFilterFields, 'voiceon.channels.filter-presets')
 
   const toggleSort = (key) =>
@@ -2185,13 +2220,14 @@ function ChannelsPage() {
     const q = query.trim().toLowerCase()
     let matched = q ? channels.filter((item) => item.name.toLowerCase().includes(q)) : channels
     if (scope === 'best') matched = matched.filter((item) => item.best)
+    if (quick) matched = matched.filter((item) => item.traits.includes(quick))
     return [...filters.apply(matched)].sort((a, b) => {
       const [left, right] = sort.dir === 'desc' ? [b, a] : [a, b]
       const value = left[sort.key]
       if (typeof value === 'number') return value - right[sort.key]
       return String(value ?? '').localeCompare(String(right[sort.key] ?? ''))
     })
-  }, [query, sort, scope, filters.applied])
+  }, [query, sort, scope, quick, filters.applied])
 
   const SortHeader = ({ label, sortKey }) => (
     <button className="th-sort th-sort-button" onClick={() => toggleSort(sortKey)}>
@@ -2233,7 +2269,14 @@ function ChannelsPage() {
         </div>
       </HeaderTools>
 
-      {filters.panelOpen && <FiltersPanel {...filters.panelProps} />}
+      {filters.panelOpen && (
+        <FiltersPanel
+          {...filters.panelProps}
+          quickPresets={channelPresets}
+          activeQuick={quick}
+          onQuickToggle={setQuick}
+        />
+      )}
 
       <section className="panel users-panel">
         <div className="users-table-wrap">
