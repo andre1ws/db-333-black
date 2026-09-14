@@ -414,7 +414,9 @@ button { transition: .18s ease; }
 /* Fixed presets — the second way into the Channels list. Outline pills, the
    same pill radius the rest of the interface uses, with the explanation held
    back until hover. */
-.quick-presets { display: flex; flex-wrap: wrap; gap: 7px; margin: 12px 0 0; }
+.quick-presets { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; margin: 12px 0 0; }
+/* only worth offering once more than one preset is stacked */
+.quick-presets-clear { margin-left: 4px; font-size: 12.5px; }
 .quick-preset {
   position: relative; height: 30px; padding: 0 13px;
   display: inline-flex; align-items: center;

@@ -1067,7 +1067,7 @@ function FiltersPanel({
   fields, draft, field, condition, value, activePreset, canAdd, onAdd,
   onFieldChange, onConditionChange, onValueChange, onRemove, onClear, onClose,
   onApply, applyDisabled, presetName, onPresetNameChange, onSavePreset, onDeletePreset,
-  quickPresets, activeQuick, onQuickToggle,
+  quickPresets, activeQuick, onQuickToggle, onQuickClear,
 }) {
   const currentField = fields.find((item) => item.key === field)
   const valueDisabled = !currentField || condition === 'empty'
@@ -1145,14 +1145,19 @@ function FiltersPanel({
             {quickPresets.map((preset) => (
               <button
                 key={preset.key}
-                className={`quick-preset ${activeQuick === preset.key ? 'active' : ''}`}
-                onClick={() => onQuickToggle(activeQuick === preset.key ? null : preset.key)}
-                aria-pressed={activeQuick === preset.key}
+                className={`quick-preset ${activeQuick.includes(preset.key) ? 'active' : ''}`}
+                onClick={() => onQuickToggle(preset.key)}
+                aria-pressed={activeQuick.includes(preset.key)}
               >
                 {preset.label}
                 <span className="quick-preset-hint" role="tooltip">{preset.hint}</span>
               </button>
             ))}
+            {activeQuick.length > 1 && (
+              <button className="text-link quick-presets-clear" onClick={onQuickClear}>
+                Clear {activeQuick.length} presets
+              </button>
+            )}
           </div>
         )}
 
@@ -2210,7 +2215,7 @@ function ChannelsPage() {
   const [query, setQuery] = useState('')
   const [sort, setSort] = useState({ key: 'subscribers', dir: 'desc' })
   const [scope, setScope] = useState(null)
-  const [quick, setQuick] = useState(null)
+  const [quick, setQuick] = useState([])
   const filters = useFilters(channelFilterFields, 'voiceon.channels.filter-presets')
 
   const toggleSort = (key) =>
@@ -2220,7 +2225,7 @@ function ChannelsPage() {
     const q = query.trim().toLowerCase()
     let matched = q ? channels.filter((item) => item.name.toLowerCase().includes(q)) : channels
     if (scope === 'best') matched = matched.filter((item) => item.best)
-    if (quick) matched = matched.filter((item) => item.traits.includes(quick))
+    if (quick.length) matched = matched.filter((item) => quick.every((key) => item.traits.includes(key)))
     return [...filters.apply(matched)].sort((a, b) => {
       const [left, right] = sort.dir === 'desc' ? [b, a] : [a, b]
       const value = left[sort.key]
@@ -2274,7 +2279,10 @@ function ChannelsPage() {
           {...filters.panelProps}
           quickPresets={channelPresets}
           activeQuick={quick}
-          onQuickToggle={setQuick}
+          onQuickToggle={(key) =>
+            setQuick((current) =>
+              current.includes(key) ? current.filter((item) => item !== key) : [...current, key])}
+          onQuickClear={() => setQuick([])}
         />
       )}
 
