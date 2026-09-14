@@ -6,6 +6,8 @@
   --surface-3: #ededf0;
   --border: #e5e5e9;
   --border-strong: #d7d7dd;
+  /* the nav card — the one dark surface in the shell */
+  --nav-canvas: #202427;
 
   /* — text — */
   --text: #1a1a1c;

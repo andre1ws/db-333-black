@@ -4,10 +4,25 @@ button { border: 0; cursor: pointer; color: inherit; }
 
 /* the shell is the grey canvas; the working area floats on it as a white card */
 .app-shell { display: flex; height: 100vh; overflow: hidden; background: var(--canvas); color: var(--text); }
+/* the nav rides its own dark card, mirroring the content card's inset and radius.
+   the theme tokens are redefined here so every nested rule inverts with it. */
 .sidebar {
-  width: 214px; flex: 0 0 214px; padding: 14px 8px 14px 14px;
-  background: transparent; display: flex; flex-direction: column;
-  height: 100vh; overflow-y: auto; z-index: 20;
+  --text: #f1f2f3;
+  --text-2: #b2b8bc;
+  --text-muted: #838b90;
+  --text-faint: #6a7276;
+  --surface: #2b3034;
+  --surface-2: #343a3e;
+  --surface-3: #343a3e;
+  --border: #363c41;
+  --border-strong: #464d52;
+
+  width: 214px; flex: 0 0 214px; padding: 12px 10px;
+  margin: 10px 0 10px 10px;
+  background: var(--nav-canvas); color: var(--text);
+  border-radius: var(--r-lg);
+  display: flex; flex-direction: column;
+  overflow-y: auto; z-index: 20;
   scrollbar-width: thin; scrollbar-color: var(--border-strong) transparent;
 }
 .sidebar::-webkit-scrollbar { width: 6px; }
@@ -26,11 +41,11 @@ button { border: 0; cursor: pointer; color: inherit; }
   color: var(--text-2); font-size: 12.5px; text-align: left; letter-spacing: -.1px;
 }
 .nav-item svg { color: var(--text-muted); }
-.nav-item:hover { background: #ffffffb0; color: var(--text); }
+.nav-item:hover { background: #ffffff12; color: var(--text); }
 .nav-item:hover svg { color: var(--text-2); }
 .nav-item.active {
   background: var(--surface); color: var(--text); font-weight: 500;
-  border-color: var(--border); box-shadow: var(--shadow-sm);
+  border-color: var(--border-strong); box-shadow: inset 0 1px 0 #ffffff0f;
 }
 .nav-item.active svg { color: var(--text); }
 .nav-item span { flex: 1; }
@@ -63,7 +78,7 @@ button { border: 0; cursor: pointer; color: inherit; }
 
 .main {
   min-width: 0; flex: 1; display: flex; flex-direction: column; min-height: 0;
-  margin: 10px 10px 10px 0; background: var(--surface);
+  margin: 10px; background: var(--surface);
   border: 1px solid var(--border); border-radius: var(--r-lg); overflow: hidden;
 }
 .topbar {
@@ -119,8 +134,9 @@ button { transition: .18s ease; }
 
 @media (max-width: 900px) {
   .sidebar {
-    position: fixed; left: 0; transform: translateX(-105%); transition: transform .25s ease;
-    width: 222px; background: var(--canvas); border-right: 1px solid var(--border);
+    position: fixed; left: 0; top: 0; height: 100vh;
+    transform: translateX(-105%); transition: transform .25s ease;
+    width: 222px; margin: 0; border-radius: 0;
   }
   .sidebar.open { transform: translateX(0); }
   .close-sidebar { display: grid !important; }
@@ -299,10 +315,9 @@ button { transition: .18s ease; }
   background: var(--surface); box-shadow: inset 0 -1px 0 var(--border);
 }
 .users-table td {
-  height: 46px; padding: 7px 10px; border-bottom: 1px solid var(--border);
+  height: 46px; padding: 7px 10px;
   font-size: 14px; color: var(--text); vertical-align: middle;
 }
-.users-table tbody tr:last-child td { border-bottom: 0; }
 /* edge gutters match the header padding, so column one lines up with the search */
 .users-table th:first-child, .users-table td:first-child,
 .promotions-table th:first-child, .promotions-table td:first-child { padding-left: 18px; }
@@ -567,13 +582,12 @@ button { transition: .18s ease; }
   color: var(--text); font-size: 14px; font-weight: 800; white-space: nowrap;
 }
 .promotions-table td {
-  height: 42px; padding: 6px 10px; border-bottom: 1px solid var(--border);
+  height: 42px; padding: 6px 10px;
   color: var(--text); font-size: 13px;
 }
 .promotions-table tbody td:nth-child(5), .promotions-table tbody td:nth-child(6) {
   font-variant-numeric: tabular-nums; font-size: 13px; color: var(--text);
 }
-.promotions-table tbody tr:last-child td { border-bottom: 0; }
 .promotions-table td:first-child { width: 28%; }
 .promotions-table td strong {
   display: block; max-width: 280px; overflow: hidden; text-overflow: ellipsis;
