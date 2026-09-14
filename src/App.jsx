@@ -3,9 +3,9 @@ import { createPortal } from 'react-dom'
 import {
   Archive, ArrowDown, ArrowDownUp, ArrowUp, ArrowUpDown, BadgePercent, BarChart3, CalendarDays,
   Check, ChevronDown, ChevronLeft, ChevronRight, CircleCheck, CircleDollarSign, CircleHelp, Clock, Columns3,
-  CreditCard, Download, ExternalLink, FileDown, FilePlus2, FileText, Handshake, ImagePlus, Info, Landmark,
+  CreditCard, Download, ExternalLink, FileDown, FileOutput, FilePlus2, FileText, Flame, Handshake, ImagePlus, Info, Landmark,
   ArrowLeftRight, Link2, Menu, MessageCircle, MessagesSquare, Monitor, Pencil, PlaySquare, Plus,
-  Receipt, RefreshCw, Rocket, ScanFace, Search, SlidersHorizontal, Smartphone,
+  Receipt, RefreshCw, Rocket, ScanFace, Search, SlidersHorizontal, Smartphone, Star,
   Trash2, TrendingUp, Users, Video, Wallet, X, Zap,
 } from 'lucide-react'
 import './App.css'
@@ -222,6 +222,30 @@ const partners = [
 ]
 
 const mainPartners = 931
+
+/* Channels: the roster is ranked by subscribers, and `best` is the flame the
+   reference puts on the avatar — the same channels the toolbar counts. */
+const channels = [
+  { id: 1, name: 'MrBeast', avatar: 'photo-b', best: true, status: 'IRRELEVANT', subscribers: 517000000, views: 139873613790, views30: 3063239051, lastVideo: '31 Jul 2026' },
+  { id: 2, name: 'T-Series', avatar: 'photo-d', best: true, status: 'IRRELEVANT', subscribers: 315000000, views: 355046722643, views30: 3607333533, lastVideo: '25 Aug 2026' },
+  { id: 3, name: 'Cocomelon - Nursery', avatar: 'photo-a', best: true, status: 'POSTPONED', subscribers: 202000000, views: 227168644735, views30: 1583400040, lastVideo: '30 Jul 2026' },
+  { id: 4, name: 'YouTube Movies', avatar: 'default', best: false, status: 'POSTPONED', subscribers: 199000000, views: 0, views30: 0, lastVideo: null },
+  { id: 5, name: 'SET India', avatar: 'photo-c', best: true, status: 'IRRELEVANT', subscribers: 190000000, views: 192382913729, views30: 1148273774, lastVideo: '26 Aug 2026' },
+  { id: 6, name: 'Vlad and Niki', avatar: 'photo-a', best: true, status: 'IRRELEVANT', subscribers: 150000000, views: 123302163908, views30: 627604500, lastVideo: '22 Aug 2026' },
+  { id: 7, name: 'Stokes Twins', avatar: 'photo-d', best: false, status: 'NO ANSWER', subscribers: 146000000, views: 32933956751, views30: 523255473, lastVideo: '29 Jul 2026' },
+  { id: 8, name: '\u273f Kids Diana Show', avatar: 'photo-b', best: true, status: 'POSTPONED', subscribers: 138000000, views: 125935974474, views30: 378898477, lastVideo: '20 Aug 2026' },
+  { id: 9, name: '\uae40\ud504\ub85cKIMPRO', avatar: 'photo-c', best: true, status: 'POSTPONED', subscribers: 135000000, views: 153661917113, views30: 1759463922, lastVideo: '26 Aug 2026' },
+  { id: 10, name: 'Like Nastya', avatar: 'photo-a', best: true, status: 'POSTPONED', subscribers: 133000000, views: 123037466470, views30: 412174217, lastVideo: '22 Aug 2026' },
+  { id: 11, name: 'Music', avatar: 'photo-d', best: false, status: 'IRRELEVANT', subscribers: 128000000, views: 0, views30: 0, lastVideo: null },
+  { id: 12, name: 'Zee Music Company', avatar: 'photo-c', best: true, status: 'POSTPONED', subscribers: 123000000, views: 91305955541, views30: 952358436, lastVideo: '07 Sep 2026' },
+  { id: 13, name: 'Alejo Igoa', avatar: 'photo-b', best: true, status: 'POSTPONED', subscribers: 121000000, views: 36986781865, views30: 552996834, lastVideo: '14 Aug 2026' },
+  { id: 14, name: 'WWE', avatar: 'photo-c', best: false, status: 'NO ANSWER', subscribers: 114000000, views: 106938536342, views30: 649323553, lastVideo: '16 Aug 2026' },
+  { id: 15, name: 'Goldmines', avatar: 'photo-a', best: true, status: 'POSTPONED', subscribers: 110000000, views: 32850486504, views30: 392720225, lastVideo: '18 Aug 2026' },
+]
+
+/* the reference shows the full catalogue behind the page, not just this slice */
+const channelTotal = 4903057
+const bestChannels = 4823166
 
 const labels = [
   { id: 1, name: 'Horyx', csp: ['Horyx'], more: 0, domain: 'app.horyx.com', app: false },
@@ -601,6 +625,12 @@ const promotionFilterFields = buildFilterFields(promotions, [
 const partnerFilterFields = buildFilterFields(partners, [
   { key: 'status', label: 'Status', read: (item) => item.status, format: titleCase },
   { key: 'link', label: 'Connection', read: (item) => item.link, format: titleCase },
+])
+
+const channelFilterFields = buildFilterFields(channels, [
+  { key: 'status', label: 'Status', read: (item) => item.status, format: titleCase },
+  { key: 'best', label: 'Best channel', read: (item) => yesNo(item.best) },
+  { key: 'lastVideo', label: 'Last video', read: (item) => item.lastVideo },
 ])
 
 const labelFilterFields = buildFilterFields(labels, [
@@ -2142,6 +2172,122 @@ function PartnersPage({ draft, setDraft }) {
   )
 }
 
+function ChannelsPage() {
+  const [query, setQuery] = useState('')
+  const [sort, setSort] = useState({ key: 'subscribers', dir: 'desc' })
+  const [scope, setScope] = useState(null)
+  const filters = useFilters(channelFilterFields, 'voiceon.channels.filter-presets')
+
+  const toggleSort = (key) =>
+    setSort((current) => ({ key, dir: current.key === key && current.dir === 'desc' ? 'asc' : 'desc' }))
+
+  const visible = useMemo(() => {
+    const q = query.trim().toLowerCase()
+    let matched = q ? channels.filter((item) => item.name.toLowerCase().includes(q)) : channels
+    if (scope === 'best') matched = matched.filter((item) => item.best)
+    return [...filters.apply(matched)].sort((a, b) => {
+      const [left, right] = sort.dir === 'desc' ? [b, a] : [a, b]
+      const value = left[sort.key]
+      if (typeof value === 'number') return value - right[sort.key]
+      return String(value ?? '').localeCompare(String(right[sort.key] ?? ''))
+    })
+  }, [query, sort, scope, filters.applied])
+
+  const SortHeader = ({ label, sortKey }) => (
+    <button className="th-sort th-sort-button" onClick={() => toggleSort(sortKey)}>
+      {sort.key === sortKey
+        ? (sort.dir === 'desc' ? <ArrowDown size={12} /> : <ArrowUp size={12} />)
+        : <ArrowUpDown size={12} className="th-sort-idle" />}
+      {label}
+    </button>
+  )
+
+  return (
+    <div className="users-page">
+      <HeaderTools>
+        <label className="users-search">
+          <Search size={16} />
+          <input
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            placeholder="Name, channel ID or nickname"
+          />
+        </label>
+        <FilterBar filters={filters} />
+        <div className="users-toolbar-actions">
+          <button
+            className={`count-button ${scope === 'best' ? 'active' : ''}`}
+            onClick={() => setScope(scope === 'best' ? null : 'best')}
+          >
+            <Flame size={15} strokeWidth={1.7} fill="currentColor" />
+            Best channels
+            <span>{count(bestChannels)}</span>
+          </button>
+          <button
+            className={`archive-button ${scope === 'mine' ? 'active' : ''}`}
+            onClick={() => setScope(scope === 'mine' ? null : 'mine')}
+          >
+            <Star size={16} /> My channels
+          </button>
+          <button className="icon-button toolbar-outline-button" aria-label="Export"><FileOutput size={16} /></button>
+        </div>
+      </HeaderTools>
+
+      {filters.panelOpen && <FiltersPanel {...filters.panelProps} />}
+
+      <section className="panel users-panel">
+        <div className="users-table-wrap">
+          <table className="users-table channels-table">
+            <thead>
+              <tr>
+                <th>
+                  <span className="th-user">
+                    Channel
+                    <small>{count(channelTotal)}</small>
+                  </span>
+                </th>
+                <th>Status</th>
+                <th className="amount-column"><SortHeader label="Subscribers" sortKey="subscribers" /></th>
+                <th className="amount-column"><SortHeader label="Views" sortKey="views" /></th>
+                <th className="amount-column"><SortHeader label="Views for 30 days" sortKey="views30" /></th>
+                <th className="amount-column"><SortHeader label="Last video" sortKey="lastVideo" /></th>
+              </tr>
+            </thead>
+            <tbody>
+              {visible.map((item) => (
+                <tr key={item.id} className="clickable-row">
+                  <td>
+                    <div className="user-cell channel-cell">
+                      <span className="channel-avatar">
+                        <UserAvatar name={item.name} variant={item.avatar} />
+                        {item.best && <span className="channel-flame" aria-label="Best channel"><Flame size={9} /></span>}
+                      </span>
+                      <strong>{item.name}</strong>
+                      <span className="channel-chat" aria-label="Open chat"><MessageCircle size={17} /></span>
+                    </div>
+                  </td>
+                  <td><span className={`status-pill ${statusSlug(item.status)}`}>{item.status}</span></td>
+                  <td className="amount-column">{count(item.subscribers)}</td>
+                  <td className="amount-column">{count(item.views)}</td>
+                  <td className="amount-column">{count(item.views30)}</td>
+                  <td className="amount-column">
+                    {item.lastVideo ?? <span className="empty-cell">&mdash;</span>}
+                  </td>
+                </tr>
+              ))}
+              {visible.length === 0 && (
+                <tr>
+                  <td colSpan={6} className="users-empty">No channels match your search.</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  )
+}
+
 function App() {
   const [active, setActive] = useState('Users')
   const [menuOpen, setMenuOpen] = useState(false)
@@ -2212,6 +2358,7 @@ function App() {
             {active === 'Partners' && (
               <PartnersPage draft={partnerDraft} setDraft={setPartnerDraft} />
             )}
+            {active === 'Channels' && <ChannelsPage />}
             {isTransactions && <TransactionsPage region={active.replace('Transactions ', '')} />}
           </div>
         </HeaderSlotContext.Provider>
