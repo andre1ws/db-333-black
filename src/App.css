@@ -341,19 +341,21 @@ button { transition: .18s ease; }
 .users-table th.amount-column,
 .users-table td.amount-column { text-align: right; white-space: nowrap; }
 .users-table td.amount-column,
-.transactions-table tfoot td.amount-column {
+.users-table tfoot td.amount-column {
   font-variant-numeric: tabular-nums;
   font-size: 13.5px; color: var(--text);
 }
 .amount-column .th-sort { flex-direction: row-reverse; }
 .th-hint { color: var(--text-faint); }
 .th-sort-idle { color: var(--text-faint); }
-.transactions-table tfoot td {
+/* the total mirrors the header: same weight and ink, the rule on top instead
+   of below — so the table is bracketed by two lines and nothing else */
+.users-table tfoot td {
   position: sticky; bottom: 0; z-index: 2;
-  padding: 12px; background: var(--surface-2); box-shadow: inset 0 1px 0 var(--border);
-  font-size: 13px; font-weight: 600; color: var(--text-2);
+  padding: 12px 10px; background: var(--surface); box-shadow: inset 0 1px 0 var(--border);
+  font-size: 14px; font-weight: 800; color: var(--text);
 }
-.transactions-table tfoot td.amount-column { text-transform: none; letter-spacing: 0; font-size: 14.5px; }
+.users-table tfoot td.amount-column { font-size: 14px; font-weight: 800; }
 /* Partners: the identity column is .user-cell like every other table —
    this only sets its width, the divider and the connection icon */
 .partners-table { min-width: 1240px; }
