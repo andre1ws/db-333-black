@@ -2260,10 +2260,13 @@ function ChannelsPage() {
                     <div className="user-cell channel-cell">
                       <span className="channel-avatar">
                         <UserAvatar name={item.name} variant={item.avatar} />
-                        {item.best && <span className="channel-flame" aria-label="Best channel"><Flame size={9} /></span>}
+                        {item.best && <span className="channel-flame" aria-label="Best channel"><Flame size={15} /></span>}
                       </span>
                       <strong>{item.name}</strong>
-                      <span className="channel-chat" aria-label="Open chat"><MessageCircle size={17} /></span>
+                      <span className="channel-chat" aria-label="Open chat">
+                        <MessageCircle size={15} />
+                        <MessageCircle size={15} />
+                      </span>
                     </div>
                   </td>
                   <td><span className={`status-pill ${statusSlug(item.status)}`}>{item.status}</span></td>
