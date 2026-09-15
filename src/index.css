@@ -58,7 +58,8 @@
   background: var(--canvas);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
+  /* no -webkit-font-smoothing: antialiased — on macOS it thins every weight,
+     and at this type size the interface starts to read washed out */
 }
 
 html, body, #root { margin: 0; min-width: 320px; min-height: 100%; }
